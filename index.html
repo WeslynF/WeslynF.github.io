@@ -4,8 +4,8 @@
         <title> Weslyn's Amazing Website </title>
         <style>
             body {
-                background: rgb(125, 198, 205);
-                color: rgb(45, 45, 45);
+                background: rgb(122, 12, 12);
+                color: rgb(214, 33, 33);
                 padding: 10px;
                 font-family: arial;
             }
@@ -16,8 +16,9 @@
          
             /* navigation menu */
             nav {
-                background: rgb(239, 80, 41);
+                background: rgb(204, 14, 45);
                margin: 0 auto;
+               margin-bottom: 20px;
                 display: flex;
                 padding: 10px;
             }
@@ -67,31 +68,32 @@
     </head>
     
     <body>
+        <!-- All content goes here -->
+        <div id="all-contents">
             <nav>   
                 <h1> My Awesome Website
-                    <ul> 
-                        <li> 
+                    <ul id="nav-ul"> 
+                        <li class="nav-li"> 
                             <a href="https://www.lpssonline.com/schools/david-thibodaux"> Home </a> 
                         </li>
-                        <li>
+                        <li class="nav-li">
                             <a href="https://www.firstmenonthemoon.com/"> Portfolio </a>
                         </li>
                     </ul>
                 </h1>
-
             </nav>
             
             <main>  
                 <!-- Sidebar section -->
-                <div> 
-                    <img src="https://m.media-amazon.com/images/I/31D3w68WxuL._AC_.jpg"
+                <div class="sidebar"> 
+                    <img class="sidebar-img" src ="https://m.media-amazon.com/images/I/31D3w68WxuL._AC_.jpg"
                 </div>
                 <!-- Content section -->
-                <div> 
+                <div class="content"> 
                     <h2> Weslyn Flores </h2>
                     <p> Student at DTSMA </p>
                     <!-- Interests section -->
-                    <div>
+                    <div id="interests">
                        <h3> Interests </h3>
                        <ul> 
                             <li> Games </li>
