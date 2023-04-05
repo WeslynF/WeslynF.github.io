@@ -59,7 +59,7 @@ var background = function (window) {
             var buildings = [];
             for (var i = 0; i < 5; ++i) {
                 var buildingHeight = Math.floor(Math.random() * 275) + 100;
-                var building = draw.rect(85, buildingHeight, "Maroon", "Red", 3);
+                var building = draw.rect(85, buildingHeight, "#33A6A6", "#59D9D9", 3);
                 building.x = 200 * i;
                 building.y = groundY - buildingHeight;
                 background.addChild(building);
@@ -70,6 +70,7 @@ var background = function (window) {
             tree = draw.bitmap("img/tree.png");
             tree.x = 200;
             tree.y = 220;
+
             background.addChild(tree);
             
         } // end of render function - DO NOT DELETE
@@ -87,15 +88,18 @@ var background = function (window) {
             tree.x = tree.x - 1;
 
             if (tree.x < -200) {
-            tree.x = canvasWidth;
+                tree.x = canvasWidth;
             }
             
             // TODO 5: Part 2 - Parallax
           
-                // code to do something with each element
-              }
-           
-        } // end of update function - DO NOT DELETE
+            for (var i = 0; i < buildings.length; i++) {
+                var building = buildings[i];
+                if (building.x < -200) {
+                     building.x = canvasWidth;
+                };
+              };
+        }; // end of update function - DO NOT DELETE
         
         
         
@@ -112,7 +116,7 @@ var background = function (window) {
         render();
         return background;
     };
-
+};
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
 if((typeof process !== 'undefined') &&
