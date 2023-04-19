@@ -27,7 +27,7 @@ var background = function (window) {
         
         // ANIMATION VARIABLES HERE:
         var tree;
-     
+        var buildings = [];
         // called at the start of game and whenever the page is resized
         // add objects for display in background. draws each image added to the background once
         function render() {
@@ -40,11 +40,11 @@ var background = function (window) {
             background.addChild(backgroundFill);
             
             // TODO: 3 - Add a moon and starfield
-            var moon = draw.bitmap("img/crimson moon.png");
+            var moon = draw.bitmap("img/moon.png");
             moon.x = 700;
             moon.y = 5;
-            moon.scaleX = 0.25;
-            moon.scaleY = 0.25;
+            moon.scaleX = 1;
+            moon.scaleY = 1;
             background.addChild(moon);
 
             
@@ -56,7 +56,6 @@ var background = function (window) {
             }
             
             // TODO 5: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            var buildings = [];
             for (var i = 0; i < 5; ++i) {
                 var buildingHeight = Math.floor(Math.random() * 275) + 100;
                 var building = draw.rect(85, buildingHeight, "#33A6A6", "#59D9D9", 3);
@@ -85,7 +84,7 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 4: Part 2 - Move the tree!
-            tree.x = tree.x - 1;
+            tree.x = tree.x - 2;
 
             if (tree.x < -200) {
                 tree.x = canvasWidth;
@@ -94,11 +93,13 @@ var background = function (window) {
             // TODO 5: Part 2 - Parallax
           
             for (var i = 0; i < buildings.length; i++) {
-                var building = buildings[i];
-                if (building.x < -200) {
-                     building.x = canvasWidth;
+                var bldg = buildings[i];
+                bldg.x = bldg.x - 1;
+
+                if (bldg.x < -100) {
+                     bldg.x = canvasWidth;
                 };
-              };
+            };
         }; // end of update function - DO NOT DELETE
         
         
