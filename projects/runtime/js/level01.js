@@ -23,7 +23,7 @@ var level01 = function (window) {
         };
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
-        game.setDebugMode(false);
+        game.setDebugMode(true);
 
         // TODO 6 and on go here
 
@@ -44,7 +44,7 @@ var level01 = function (window) {
           }
         
         function createWeen(x, y) {
-            var hitZoneSize = 30;
+            var hitZoneSize = 25;
             var damageFromObstacle = 20;
             var weenBladeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
             
@@ -52,7 +52,7 @@ var level01 = function (window) {
             weenBladeHitZone.y = y;
             game.addGameItem(weenBladeHitZone);
             
-            var obstacleImage = draw.bitmap("img/ween.jpeg");
+            var obstacleImage = draw.bitmap("img/joseph_.jpg");
             obstacleImage.x = -25;
             obstacleImage.y = -25;
             weenBladeHitZone.addChild(obstacleImage);
@@ -60,9 +60,56 @@ var level01 = function (window) {
 
         createSawBlade(300,395)
         createSawBlade(700,300)
-        createSawBlade(1000,450)
-        createWeen(1350, 500)
+        createSawBlade(1000,290)
+        createWeen(1350, 400)
+        createWeen(1750, 300)
+        createWeen(550, 400)
         
+        var enemy = game.createGameItem("enemy", 50);
+        var redSquare = draw.rect(100, 100, "blue");
+        redSquare.x = -50;
+        redSquare.y = -50;
+        enemy.addChild(redSquare);
+        
+        enemy.x = 400;
+        enemy.y = groundY - 50;
+        game.addGameItem(enemy);
+        enemy.velocityX = -2;
+        enemy.rotationalVelocity = 5;
+
+        enemy.onPlayerCollision = function() {
+            game.changeIntegrity(-20)
+        };
+        enemy.onProjectileCollision = function () {
+            game.increaseScore(100);
+            enemy.shrink();
+        }
+        
+        
+        function createEnemy(x, y) {
+            var enemy = game.createGameItem("enemy", 50);
+            var redSquare = draw.bitmap("img/weenie.jpeg");
+            redSquare.x = x;
+            redSquare.y = y;
+            enemy.addChild(redSquare);
+            
+            enemy.x = 400;
+            enemy.y = -200;
+            game.addGameItem(enemy);
+            enemy.velocityX = -2;
+    
+            enemy.onPlayerCollision = function() {
+                game.changeIntegrity(-20)
+            };
+            enemy.onProjectileCollision = function () {
+                game.increaseScore(100);
+                enemy.shrink();
+            }
+          }
+
+        createEnemy(400, groundY - 10);
+        createEnemy(800, groundY - 80);
+        createEnemy(1200, groundY - 50);
         // DO NOT EDIT CODE BELOW HERE
     }
 };
