@@ -65,38 +65,18 @@ var level01 = function (window) {
         createWeen(1750, 300)
         createWeen(550, 400)
         
-        var enemy = game.createGameItem("enemy", 50);
-        var redSquare = draw.rect(100, 100, "blue");
-        redSquare.x = -50;
-        redSquare.y = -50;
-        enemy.addChild(redSquare);
-        
-        enemy.x = 400;
-        enemy.y = groundY - 50;
-        game.addGameItem(enemy);
-        enemy.velocityX = -2;
-        enemy.rotationalVelocity = 5;
-
-        enemy.onPlayerCollision = function() {
-            game.changeIntegrity(-20)
-        };
-        enemy.onProjectileCollision = function () {
-            game.increaseScore(100);
-            enemy.shrink();
-        }
-        
         
         function createEnemy(x, y) {
             var enemy = game.createGameItem("enemy", 50);
-            var redSquare = draw.bitmap("img/weenie.jpeg");
-            redSquare.x = x;
-            redSquare.y = y;
+            var redSquare = draw.bitmap("img/HUNTAH.jpg");
+            redSquare.x = -50;
+            redSquare.y = -50;
             enemy.addChild(redSquare);
             
-            enemy.x = 400;
-            enemy.y = -200;
+            enemy.x = x;
+            enemy.y = y;
             game.addGameItem(enemy);
-            enemy.velocityX = -2;
+            enemy.velocityX = -3;
     
             enemy.onPlayerCollision = function() {
                 game.changeIntegrity(-20)
@@ -107,9 +87,55 @@ var level01 = function (window) {
             }
           }
 
-        createEnemy(400, groundY - 10);
-        createEnemy(800, groundY - 80);
-        createEnemy(1200, groundY - 50);
+        createEnemy(1500, groundY - 100);
+        createEnemy(1800, groundY - 150);
+        createEnemy(600, groundY - 120);
+
+        function createReward(x,y) {
+            var enemy = game.createGameItem("enemy", 50);
+            var redSquare = draw.bitmap("img/weeniee.jpeg");
+            redSquare.x = -50;
+            redSquare.y = -50;
+            enemy.addChild(redSquare);
+            
+            enemy.x = x;
+            enemy.y = y;
+            game.addGameItem(enemy);
+            enemy.velocityX = -2;
+    
+            enemy.onPlayerCollision = function() {
+                game.changeIntegrity(20)
+            };
+            enemy.onProjectileCollision = function () {
+                game.increaseScore(100);
+                enemy.shrink();
+            }
+          }
+        
+        createReward(1200, groundY - 120)
+
+        function createMarker(x,y) {
+            var enemy = game.createGameItem("enemy", 50);
+            var redSquare = draw.bitmap("img/star.jpg");
+            redSquare.x = -100;
+            redSquare.y = -100;
+            enemy.addChild(redSquare);
+            
+            enemy.x = x;
+            enemy.y = y;
+            game.addGameItem(enemy);
+            enemy.velocityX = -3;
+    
+            enemy.onPlayerCollision = function() {
+                game.startLevel()
+            };
+            enemy.onProjectileCollision = function () {
+                game.startLevel()
+                enemy.shrink();
+            }
+          }
+        
+        createMarker(2750, 350)
         // DO NOT EDIT CODE BELOW HERE
     }
 };
