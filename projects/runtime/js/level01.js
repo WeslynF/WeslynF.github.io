@@ -11,16 +11,40 @@ var level01 = function (window) {
 
         // this data will allow us to define all of the
         // behavior of our game
-        var levelData = {
-            "name": "Robot Romp",
-            "number": 1, 
-            "speed": -3,
-            "gameItems": [
-                { "type": "sawblade", "x": 400, "y": groundY },
-                { "type": "sawblade", "x": 600, "y": groundY },
-                { "type": "sawblade", "x": 900, "y": groundY },
-            ]
-        };
+        var levelData = [
+            {
+              name: "Robot Romp",
+              number: 1,
+              speed: -3,
+              gameItems: [
+                { type: "sawblade", x: 400, y: groundY },
+                { type: "sawblade", x: 600, y: groundY },
+                { type: "sawblade", x: 900, y: groundY },
+                { type: "marker", x: 900, y: groundY },
+              ],
+            },
+            {
+              name: "Robot Rampage",
+              number: 2,
+              speed: -3,
+              gameItems: [
+                { type: "sawblade", x: 400, y: groundY },
+                { type: "sawblade", x: 600, y: groundY },
+                { type: "sawblade", x: 900, y: groundY },
+                { type: "reward", "x": 2000, "y": groundY - 60},
+              ],
+            },
+            {
+                name: "Level Awesome",
+                number : 3,
+                speed: -2,
+                gameItems: [
+                { type: "sawblade", x: 400, y: groundY },
+                { type: "sawblade", x: 600, y: groundY },
+                { type: "sawblade", x: 900, y: groundY },
+                ]
+            }
+          ];
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
         game.setDebugMode(true);
@@ -136,6 +160,15 @@ var level01 = function (window) {
           }
         
         createMarker(2750, 350)
+
+        var level = levelData.currentLevel
+        var levelObjects = levelData.gameItems
+        
+        for (var i = 0; i < levelObjects.length; i++) {
+            var obj = [i];
+          
+            // code to do something with each element
+          }
         // DO NOT EDIT CODE BELOW HERE
     }
 };
