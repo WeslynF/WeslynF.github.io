@@ -17,10 +17,10 @@ var level01 = function (window) {
               number: 1,
               speed: -3,
               gameItems: [
-                { type: "sawblade", x: 400, y: groundY },
-                { type: "sawblade", x: 600, y: groundY },
-                { type: "sawblade", x: 900, y: groundY },
-                { type: "marker", x: 900, y: groundY },
+                { type: "ween", x: 400, y: groundY-100 },
+                { type: "ween", x: 600, y: groundY-20 },
+                { type: "sawblade", x: 900, y: groundY-220 },
+                { type: "marker", x: 900, y: groundY-10 },
               ],
             },
             {
@@ -28,9 +28,9 @@ var level01 = function (window) {
               number: 2,
               speed: -3,
               gameItems: [
-                { type: "sawblade", x: 400, y: groundY },
-                { type: "sawblade", x: 600, y: groundY },
-                { type: "sawblade", x: 900, y: groundY },
+                { type: "enemy", x: 400, y: groundY-50 },
+                { type: "enemy", x: 600, y: groundY-100 },
+                { type: "reward", x: 900, y: groundY -200 },
                 { type: "reward", "x": 2000, "y": groundY - 60},
               ],
             },
@@ -40,14 +40,14 @@ var level01 = function (window) {
                 speed: -2,
                 gameItems: [
                 { type: "sawblade", x: 400, y: groundY },
-                { type: "sawblade", x: 600, y: groundY },
-                { type: "sawblade", x: 900, y: groundY },
+                { type: "enemy", x: 600, y: groundY },
+                { type: "enemy", x: 900, y: groundY },
                 ]
             }
           ];
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
-        game.setDebugMode(true);
+        game.setDebugMode(false);
 
         // TODO 6 and on go here
 
@@ -82,12 +82,7 @@ var level01 = function (window) {
             weenBladeHitZone.addChild(obstacleImage);
         }
 
-        createSawBlade(300,395)
-        createSawBlade(700,300)
-        createSawBlade(1000,290)
-        createWeen(1350, 400)
-        createWeen(1750, 300)
-        createWeen(550, 400)
+        
         
         
         function createEnemy(x, y) {
@@ -111,9 +106,7 @@ var level01 = function (window) {
             }
           }
 
-        createEnemy(1500, groundY - 100);
-        createEnemy(1800, groundY - 150);
-        createEnemy(600, groundY - 120);
+     
 
         function createReward(x,y) {
             var enemy = game.createGameItem("enemy", 50);
@@ -136,7 +129,7 @@ var level01 = function (window) {
             }
           }
         
-        createReward(1200, groundY - 120)
+        
 
         function createMarker(x,y) {
             var enemy = game.createGameItem("enemy", 50);
@@ -161,17 +154,31 @@ var level01 = function (window) {
         
         createMarker(2750, 350)
 
-        var level = levelData.currentLevel
-        var levelObjects = levelData.gameItems
-        
-        for (var i = 0; i < levelObjects.length; i++) {
-            var obj = [i];
-          
-            // code to do something with each element
+        for (var i = 0; i < levelData.length; i++) {
+          var level = levelData[i];
+          var gameItems = level.gameItems;
+          for (var j = 0; j < gameItems.length; j++) {
+              var item = gameItems[j];
+              var x = item.x;
+              var y = item.y;
+              var type = item.type;
+              if (type === "sawblade") {
+                  createSawBlade(x, y);
+              } else if (type === "ween") {
+                  createWeen(x, y);
+              } else if (type === "enemy") {
+                  createEnemy(x, y);
+              } else if (type === "reward") {
+                  createReward(x, y);
+              } else if (type === "marker") {
+                  createMarker(x, y);
+              }
           }
+      }
+  };
         // DO NOT EDIT CODE BELOW HERE
     }
-};
+
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
 if((typeof process !== 'undefined') &&
