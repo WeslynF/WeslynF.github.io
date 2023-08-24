@@ -31,7 +31,7 @@ var level01 = function (window) {
                 { type: "enemy", x: 400, y: groundY-50 },
                 { type: "enemy", x: 600, y: groundY-100 },
                 { type: "reward", x: 900, y: groundY -200 },
-                { type: "reward", "x": 2000, "y": groundY - 60},
+                { type: "reward", "x": 1700, "y": groundY - 60},
               ],
             },
             {
