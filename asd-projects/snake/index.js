@@ -112,32 +112,29 @@ function moveSnake() {
   column/row properties. 
   
   */
-  for ( var i = snake.body.length-1; i>0; i--) {
+  for (var i = snake.body.length - 1; i > 0; i--) {
     var snakeSquare = snake.body[i];
-    var nextSnakeSquare = snake.body[i-1];
-    
-    var nextRow = snakeSquare.row;
-    var nextColumn = snakeSquare.column;
-    var nextDirection = snakeSquare.direction;
-    
-    if (nextSnakeSquare.direction === "left") {
-      nextColumn = nextSnakeSquare.column;
-    } else if (nextSnakeSquare.direction === "right") {
-      nextColumn = nextSnakeSquare.column
-    } else if (nextSnakeSquare.direction === "up") {
-      nextRow = nextSnakeSquare.row;
-    } else if (nextSnakeSquare.direction === "down") {
-      nextRow = nextSnakeSquare.row 
-    }
-    
+    var nextSnakeSquare = snake.body[i - 1];
+
+    var nextRow = nextSnakeSquare.row;
+    var nextColumn = nextSnakeSquare.column;
+    var nextDirection = nextSnakeSquare.direction;
+
     snakeSquare.direction = nextDirection;
     snakeSquare.row = nextRow;
     snakeSquare.column = nextColumn;
     repositionSquare(snakeSquare);
 }
 
-  //Before moving the head, check for a new direction from the keyboard input
-  checkForNewDirection();
+
+  /* 
+  TODO 7: determine the next row and column for the snake's head
+  
+  HINT: The snake's head will need to move forward 1 square based on the value
+  of snake.head.direction which may be one of "left", "right", "up", or "down"
+  */
+    //Before moving the head, check for a new direction from the keyboard input
+    checkForNewDirection();
     if (snake.head.direction === "left") {
       snake.head.column = snake.head.column - 1;
     } else if (snake.head.direction === "right") {
@@ -148,13 +145,6 @@ function moveSnake() {
       snake.head.row = snake.head.row - 1
     }
     repositionSquare(snake.head);
-  /* 
-  TODO 7: determine the next row and column for the snake's head
-  
-  HINT: The snake's head will need to move forward 1 square based on the value
-  of snake.head.direction which may be one of "left", "right", "up", or "down"
-  */
-
 }
 
 function hasHitWall() {
@@ -221,14 +211,15 @@ function handleAppleCollision() {
 }
 
 function hasCollidedWithSnake() {
-  /* 
-  TODO 12: Should return true if the snake's head has collided with any part of the
-  snake's body.
-  
-  HINT: Each part of the snake's body is stored in the snake.body Array. The
-  head and each part of the snake's body also knows its own row and column.
-  
-  */
+
+
+  for (var i = 1; i < snake.body.length; i++) {
+      var snakeSquare = snake.body[i];
+    
+      if (snake.head.row === snakeSquare.row && snake.head.column === snakeSquare.column) {
+          return true; 
+      }
+  }
 
   return false;
 }
@@ -354,6 +345,7 @@ function getRandomAvailablePosition() {
     not occupied by a snakeSquare in the snake's body. If it is then set 
     spaceIsAvailable to false so that a new position is generated.
     */
+   
   }
 
   return randomPosition;
