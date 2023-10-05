@@ -13,11 +13,11 @@ var highScoreElement = $("#highScore");
 // Game Variables
 var snake = {
 
-}
+};
 var apple = {
 
-}
-var score = 0
+};
+var score = 0;
 // Constant Variables
 var ROWS = 20;
 var COLUMNS = 20;
@@ -33,7 +33,7 @@ var KEY = {
 var updateInterval;
 
 // variable to keep track of the key (keycode) last pressed by the user
-var activeKey
+var activeKey;
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////// GAME SETUP //////////////////////////////////////
@@ -51,7 +51,7 @@ function init() {
   // TODO 4c-2: initialize the snake
   // initialize the snake's body as an empty Array
   snake.body = [];
-  makeApple()
+  makeApple();
 
   // make the first snakeSquare and set it as the head
   makeSnakeSquare(10, 10);
@@ -114,7 +114,7 @@ function moveSnake() {
   
   */
   for (var i = snake.body.length - 1; i > 0; i--) {
-    var snakeSquare = snake.body[i];
+    let snakeSquare = snake.body[i];
     var nextSnakeSquare = snake.body[i - 1];
 
     var nextRow = nextSnakeSquare.row;
@@ -215,7 +215,7 @@ function hasCollidedWithSnake() {
 
 
   for (var i = 1; i < snake.body.length; i++) {
-      var snakeSquare = snake.body[i];
+      let snakeSquare = snake.body[i];
     
       if (snake.head.row === snakeSquare.row && snake.head.column === snakeSquare.column) {
           return true; 
@@ -345,14 +345,12 @@ function getRandomAvailablePosition() {
     not occupied by a snakeSquare in the snake's body. If it is then set 
     spaceIsAvailable to false so that a new position is generated.
     */
-    for (i = 0; i <= snake.body.length; i++) {
-      var snakeSquare = snake.body[i]
-      if (snakeSquare.row === randomPosition.row && snakeSquare.column === randomPosition.column) {
-      spaceIsAvailable = false;
+    for (var i = 150; i <= snake.body.length; i--) {
+      let snakeSquare = snake.body[i];
+      if (snakeSquare.row === randomPosition.row || snakeSquare.column === randomPosition.column || snakeSquare.row === randomPosition.column || snakeSquare.column === randomPosition.row) {
+        spaceIsAvailable = false;
+      }
     }
-  }
-
-  
   return randomPosition;
 }
 }
