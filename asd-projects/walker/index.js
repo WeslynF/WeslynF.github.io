@@ -19,6 +19,12 @@ function runProgram(){
     DOWN: 40,  
   };
 
+  var KEY2 = {
+    W: 87,
+    A: 65,
+    S: 83,
+    D: 68,
+  };
   var walker = {
     positionX: 0,
     positionY: 0,
@@ -27,6 +33,7 @@ function runProgram(){
   }
 
   // one-time setup
+
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);
   $(document).on('keyup', handleKeyUp);                            // change 'eventType' to the type of event you want to handle
@@ -40,9 +47,10 @@ function runProgram(){
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    repositionGameItem()
-    wallCollision()
-    redrawGameItem()
+    repositionGameItem();
+    newColor();
+    wallCollision();
+    redrawGameItem();
   }
   
   /* 
@@ -51,16 +59,16 @@ function runProgram(){
   function handleKeyDown(event) {
     if (event.which === KEY.LEFT) {
       console.log("left pressed")
-      walker.speedX -= 5
+      walker.speedX = -5
     } else if (event.which === KEY.RIGHT) {
       console.log("right pressed")
-      walker.speedX += 5
+      walker.speedX = 5
     } else if (event.which === KEY.UP) {
       console.log("up pressed")
-      walker.speedY -= 5
+      walker.speedY = -5
     } else if (event.which === KEY.DOWN) {
       console.log("down pressed")
-      walker.speedY += 5
+      walker.speedY = 5
     }
   }
   
@@ -87,18 +95,36 @@ function runProgram(){
   }
 
   function wallCollision() {
-    if (walker.positionX >= $("#board").width()) {
-      walker.positionX = $("#board").width()
+    if (walker.positionX >= $("#board").width()-50) {
+      walker.positionX = $("#board").width()-50
       walker.speedX = 0
     } else if (walker.positionX <= 0) {
       walker.positionX = 0
       walker.speedX = 0
     } 
+
+    if (walker.positionY >= $("#board").height()-50) {
+      walker.positionY = $("#board").height()-50;
+      walker.speedY = 0;
+    } else if (walker.positionY <= 0) {
+      walker.positionY = 0;
+      walker.speedY = 0;
+    }
   }
 
+  function newColor() {
+    var randomColor = "#000000".replace(/0/g, function () {
+      return (~~(Math.random() * 16)).toString(16);
+    });
+    var randomColor2 = "#000000".replace(/0/g, function () {
+      return (~~(Math.random() * 16)).toString(16);
+    });
+    $("#walker1").css("background-color",randomColor)
+    $("#walker2").css("background-color",randomColor2)
+  }
   function redrawGameItem() {
-    $("#walker").css("left", walker.positionX)
-    $("#walker").css("top", walker.positionY)
+    $("#walker1").css("left", walker.positionX)
+    $("#walker1").css("top", walker.positionY)
   }
 
   
