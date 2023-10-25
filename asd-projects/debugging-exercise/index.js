@@ -76,9 +76,15 @@ function addNewCircleElement(circle, id){
         .addClass("circle");
     
     // this inserts the circle's HTML into your website
-    $circle.appendTo($board);  
+    $circle.appendTo($board);     
 }
 
+function newColor() {
+    var randomColor = "#000000".replace(/0/g, function () {
+      return (~~(Math.random() * 16)).toString(16);
+    });
+    $('.circle').css("background-color",randomColor)
+  }
 //////////////////
 // update function
 //////////////////
@@ -92,6 +98,8 @@ function update() {
     for (var i = 0; i < maxCircles; i++){
         var circle = circles[i];
 
+        // random circle color
+        newColor()
         // move the circle
         moveCircle(circle);
 
